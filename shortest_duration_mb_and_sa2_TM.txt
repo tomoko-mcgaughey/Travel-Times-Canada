@@ -1,0 +1,29 @@
+import numpy as np
+import pandas as pd
+from pdb import set_trace as bp
+
+# compute shortest time to hospital for each SA2
+df_time = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\Area_Roads_Time")
+# weights for weighted averages of shortest distances
+df_time['weight'] = df_time['Population']
+df_time.loc[df_time['Total_Sec'].isna(), 'weight'] = 0
+df_time['Total_Sec'].fillna(0, inplace=True)
+# compute weighted average of distances
+df_csd_time = df_time.groupby(['CSDUID']).apply(lambda x: pd.Series(np.ma.average(x['Total_Sec'], weights=x['weight'], axis=0), ['Total_Sec']))
+df_csd_time.reset_index(level=0, inplace=True)
+df_csd_time['Total_Min'] = np.ceil(df_csd_time['Total_Sec']/60)
+# save
+df_csd_time.to_csv('C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\Area_Roads_weight_time_py.csv', index=False)
+
+df_dis = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\Area_Roads_Dis")
+df_dis['weight'] = df_dis['Population']
+df_dis.loc[df_dis['Total_Meter'].isna(), 'weight'] = 0
+df_dis['Total_Meter'].fillna(0, inplace=True)
+df_csd_dis = df_dis.groupby(['CSDUID']).apply(lambda x: pd.Series(np.ma.average(x['Total_Meter'], weights=x['weight'], axis=0), ['Total_Meter']))
+df_csd_dis['Total_KM'] = np.ceil(df_csd_dis['Total_Meter']/1000)
+df_csd_dis.reset_index(level=0, inplace=True)
+df_csd_dis.to_csv('C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\Area_Roads_weight_dis_py.csv', index=False)
+  
+
+  
+

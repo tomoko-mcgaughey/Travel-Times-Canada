@@ -1,0 +1,55 @@
+import numpy as np
+import pandas as pd
+from pdb import set_trace as bp
+
+# sample 10 hospitals for each province
+# PE, NT, and YT excluded because less than 10 sites
+df_ab = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_AB.csv")
+df_absamp = df_ab.sample(10)
+df_absamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_ab.csv", index=False)
+
+
+df_bc = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_BC.csv")
+df_bcsamp = df_bc.sample(10)
+df_bcsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_bc.csv", index=False)
+
+
+df_MB = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_MB.csv")
+df_MBsamp = df_MB.sample(10)
+df_MBsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_MB.csv", index=False)
+
+
+df_NB = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_NB.csv")
+df_NBsamp = df_NB.sample(10)
+df_NBsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_nb.csv", index=False)
+
+
+df_NL = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_NL.csv")
+df_NLsamp = df_NL.sample(10)
+df_NLsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_NL.csv", index=False)
+
+
+df_NS = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_NS.csv")
+df_NSsamp = df_NS.sample(10)
+df_NSsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_NS.csv", index=False)
+
+
+df_QC = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_QC.csv")
+df_QCsamp = df_QC.sample(10)
+df_QCsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_QC.csv", index=False)
+
+
+df_SK = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_SK.csv")
+df_SKsamp = df_SK.sample(10)
+df_SKsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_SK.csv", index=False)
+
+
+df_NU = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_NU.csv")
+df_NUsamp = df_NU.sample(10)
+df_NUsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_NU.csv", index=False)
+
+
+df_ON = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\er_location_ON.csv")
+df_ONsamp = df_ON.sample(10)
+df_ONsamp.to_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\prov_hosp\\sample_hospitals_ON.csv", index=False)
+

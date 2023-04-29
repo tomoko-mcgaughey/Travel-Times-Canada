@@ -1,0 +1,43 @@
+import numpy as np
+import pandas as pd
+from tqdm import tqdm
+import requests as req
+import statsmodels.stats.api as sms
+from pdb import set_trace as bp
+
+# validate distances using google maps
+# get 1000 sample shortest distances for each state
+
+# for each mesh block, shortest time to hospital and hospital id
+df = pd.read_csv("C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\Google_Verify_sample\\sample_hospitals_ON.csv")
+
+# iterate over rows, get travel time from google maps
+start = '<duration>\n<value>'
+end = '</value>'
+duration_array = np.full(df.shape[0], np.nan)
+for index, row in tqdm(df.iterrows(), total=df.shape[0]):
+# compute durations
+url = 'https://maps.googleapis.com/maps/api/distancematrix/xml?origins=AIzaSyDF-NwGSsGGdZ7FtGo_w5TqBl-5GSbQP5k' + str(row['ycoord']) + ',' + str(row['xcoord']) + '&destinations=' + str(row['Hospital_Latitude']) + ',' + str(row['Hospital_Longitude']) + '&key=xyz'
+response = req.get(url)
+# extract duration
+resp = response.text.replace(' ','')
+try:
+duration_array[index] = float(resp[resp.find(start)+len(start):resp.find(end)])
+except:
+pass
+df['shortest_time_sec_google'] = duration_array
+  
+# save
+df.to_csv('C:\\Users\\Tomoko McGaughey\\Desktop\\RA Work\\SDHL\\Spatial Models\\Data Files\\Google_Verify_sample\\validation_google_ON.csv')
+  
+  # load
+  df = pd.read_pickle('../data/processed/validation_google.pkl')
+  df.dropna(inplace=True)
+  df['diff'] = df['shortest_time_sec_google'] - df['shortest_time_sec']
+  for ste in range(1, 9):
+    df_ste = df[df['STE_CODE16']==ste]
+    print(df_ste['STE_NAME16'].iloc[0])
+    print([np.round(df_ste['diff'].mean()), np.round(sms.DescrStatsW(df_ste['diff']).tconfint_mean())])
+  print('Overall')
+  print([np.round(df['diff'].mean()), np.round(sms.DescrStatsW(df['diff']).tconfint_mean())])
+        
